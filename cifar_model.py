@@ -121,5 +121,5 @@ def fit(epochs, lr, model, train_loader, val_loader, opt_func=torch.optim.SGD):
 
     return history
 
-if __name__ == "__cifar_model__":
+if __name__ == "__main__":
     history1 = fit(20, 0.1, img_sort_model, train_loader, val_loader)
