@@ -5,7 +5,16 @@ from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
 import torch.nn as nn
 import torch.nn.functional as F
+import tarfile
+import requests
 
+url = 'https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz'
+target_path = 'cifar-10-python.tar.gz'
+
+response = requests.get(url, stream=True)
+data = tarfile.open(target_path)
+data.extractall('./databatches')
+data.close()
 
 def unpickle(file):
     with open(file, 'rb') as fo:
@@ -32,7 +41,7 @@ class CustomImageDataset(Dataset):
         return tensor_of_image, label
 
 
-data_set = CustomImageDataset(r'C:\Users\leoma\PycharmProjects\PyTorch\MORE DATASETS\DataBatches\AccessibleBatches\data_batch_1')
+data_set = CustomImageDataset(r'/databatches/data_batch_1')
 
 train_ds, val_ds = torch.utils.data.random_split(data_set, [9000, 1000])
 
